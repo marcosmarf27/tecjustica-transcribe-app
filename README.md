@@ -1,11 +1,14 @@
 <p align="center">
-  <img src="docs/assets/icon.png" alt="TecJustiça Transcribe" width="128">
+  <img src="docs/assets/tecjustica-logo.jpeg" alt="TecJustiça Transcribe" width="820">
 </p>
 
-<h1 align="center">TecJustiça Transcribe</h1>
+<h1 align="center">
+  <img src="docs/assets/icon.png" width="40" align="center" alt=""> TecJustiça Transcribe
+</h1>
 
 <p align="center">
-  <strong>Transcrição automática de audiências judiciais, 100% local, com IA.</strong>
+  <strong>Transcrição automática de audiências judiciais, 100% local, com IA.</strong><br>
+  <sub>Produto <strong>TecJustiça</strong> · em parceria com Projurista</sub>
 </p>
 
 <p align="center">
@@ -13,6 +16,7 @@
   <a href="#-funcionalidades">Funcionalidades</a> •
   <a href="#-requisitos">Requisitos</a> •
   <a href="#-para-desenvolvedores">Desenvolvedores</a> •
+  <a href="#-comunidade--recursos">Comunidade</a> •
   <a href="#-licença">Licença</a>
 </p>
 
@@ -25,10 +29,23 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
 </p>
 
+<p align="center">
+  <a href="https://tecjustica.substack.com/"><img alt="Newsletter" src="https://img.shields.io/badge/Newsletter-TecJustiça-orange?style=flat-square&logo=substack&logoColor=white"></a>
+  <a href="https://github.com/marcosmarf27/tecjustica"><img alt="Marketplace" src="https://img.shields.io/badge/Marketplace-Plugins%20%26%20Skills-24292F?style=flat-square&logo=github&logoColor=white"></a>
+</p>
+
 ---
 
+### 🎬 Demo
+
 <p align="center">
-  <img src="docs/assets/demo.gif" alt="Demo do TecJustiça Transcribe" width="820">
+  <a href="https://github.com/marcosmarf27/tecjustica-transcribe-app/raw/main/docs/assets/demo.mp4">
+    <img src="docs/assets/demo.gif" alt="Demo do TecJustiça Transcribe" width="820">
+  </a>
+</p>
+
+<p align="center">
+  <sub>▶ <a href="https://github.com/marcosmarf27/tecjustica-transcribe-app/raw/main/docs/assets/demo.mp4">Assistir ao demo completo (4 min, MP4, 8,6 MB)</a></sub>
 </p>
 
 ## ✨ Por que existe
@@ -244,7 +261,34 @@ Contribuições são bem-vindas. Abra uma issue primeiro se for uma mudança gra
 
 - **CNJ Resolução 615/2025** — processamento local, sem envio de dados a terceiros
 - **LGPD** — áudio e transcrição permanecem na máquina do usuário
-- O token HuggingFace embutido é público, usado apenas para download de modelos; pode ser substituído nas Configurações
+- O token HuggingFace é opcional e fornecido pelo usuário (apenas para diarização)
+
+## 🌐 Comunidade & Recursos
+
+Gosta do projeto? Acompanhe mais conteúdo sobre tech + justiça:
+
+<table>
+<tr>
+<td width="50%">
+
+### 📬 Newsletter TecJustiça
+
+Artigos sobre IA aplicada ao Direito, automação de processos, LGPD, CNJ 615 e as ferramentas que a gente vem construindo.
+
+**[→ Inscreva-se no Substack](https://tecjustica.substack.com/)**
+
+</td>
+<td width="50%">
+
+### 🧩 Marketplace de Plugins & Skills
+
+Coleção aberta de plugins, agentes e skills para profissionais do Direito. Automação, busca jurisprudencial, análise de peças e mais.
+
+**[→ github.com/marcosmarf27/tecjustica](https://github.com/marcosmarf27/tecjustica)**
+
+</td>
+</tr>
+</table>
 
 ## 📄 Licença
 
@@ -253,6 +297,6 @@ Contribuições são bem-vindas. Abra uma issue primeiro se for uma mudança gra
 ---
 
 <p align="center">
-  <strong>TecJustiça × Projurista</strong><br>
+  <strong>TecJustiça</strong> <sub>em parceria com Projurista</sub><br>
   <em>Tecnologia a serviço da Justiça.</em>
 </p>

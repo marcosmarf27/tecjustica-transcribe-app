@@ -17,6 +17,7 @@
   "devDependencies": {
     "electron": "^41.0.3",
     "electron-builder": "^26.8.1",
+    "png-to-ico": "^3.0.1",
     "sharp": "^0.34.5"
   },
   "build": {
@@ -41,6 +42,7 @@
       "index.html",
       "styles.css",
       "assets/icon.png",
+      "assets/tecjustica-logo.jpeg",
       "assets/projurista.jpeg"
     ],
     "icon": "assets/icon.png",

@@ -2,7 +2,7 @@
 
 ## O que é
 App desktop para transcrição automática de audiências judiciais usando WhisperX. Interface Electron com backend Python (FastAPI). Suporte a GPU NVIDIA para performance, funciona offline.
-**Parceria TecJustiça × Projurista** — branding conjunto na sidebar e exportações DOCX.
+Produto **TecJustiça** — logo e branding principal. Projurista aparece como parceiro discreto na sidebar e rodapé do DOCX.
 
 ## Arquitetura
 - **Main Process** (`main.js`): gerencia janelas, spawna backend Python, IPC handlers, SQLite, auto-restart
@@ -76,7 +76,7 @@ Array de objetos com campos: `id`, `filename`, `filepath`, `model`, `language`, 
 - **Busca na transcrição**: highlight amarelo, contador, navegação prev/next, Ctrl+F.
 - **Edição inline**: double-click em segmento ativa contenteditable. Ctrl+Enter salva, Escape cancela. Re-export atualiza .txt/.srt.
 - **Variáveis CSS**: `--radius-sm/md/lg`, `--shadow-sm/md`, `--transition-fast/normal` para consistência visual.
-- **Branding parceria**: sidebar exibe logo Projurista (44px, hover glow) + "TecJustiça" + "Transcribe" + "Parceria Projurista". Na sidebar colapsada, só a logo (32px). DOCX export inclui "Parceria TecJustiça × Projurista" no cabeçalho.
+- **Branding**: sidebar exibe logo TecJustiça (44px, hover glow) + "TecJustiça" + "Transcribe" + texto discreto "em parceria com Projurista". Na sidebar colapsada, só a logo (32px). DOCX export inclui "Parceria TecJustiça × Projurista" em rodapé pequeno.
 
 ## Segurança
 - `nodeIntegration: false` + `contextIsolation: true`
@@ -100,7 +100,7 @@ Array de objetos com campos: `id`, `filename`, `filepath`, `model`, `language`, 
 - **extraResources**: inclui binário PyInstaller no instalador
 - **Após build Windows**: copiar `.exe` para `/mnt/c/Users/marco/Downloads/`
 - **Caminho do .exe**: `dist/TecJustiça Transcribe Setup 1.0.0.exe`
-- **Assets de branding**: `assets/icon.png` (ícone app) + `assets/projurista.jpeg` (logo parceiro) — ambos incluídos no build
+- **Assets de branding**: `assets/icon.png` (ícone app) + `assets/tecjustica-logo.jpeg` (logo principal) + `assets/projurista.jpeg` (logo parceiro) — todos incluídos no build
 - **ffmpeg bundled**: `resources/bin/{win,linux}/` é populado automaticamente antes do `dist:*` via hooks `predist:win`/`predist:linux` que rodam `node scripts/download-ffmpeg.js`. Os binários são copiados para `resources/bin/` no instalador e o `main.js` injeta esse caminho no `PATH` do backend Python. A pasta `resources/bin/` está no `.gitignore`
 
 ## Repositórios e Distribuição
