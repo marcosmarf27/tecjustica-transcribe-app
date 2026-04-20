@@ -38,7 +38,7 @@
 
 ### 🎬 Demo
 
-https://github.com/marcosmarf27/tecjustica-transcribe-app/raw/main/docs/assets/demo.mp4
+https://github.com/user-attachments/assets/71405e4c-46cd-42ed-b007-06371e6d75d6
 
 <p align="center">
   <sub>Também disponível no <a href="https://youtu.be/ECCIGjIR1Lo">YouTube</a>.</sub>
