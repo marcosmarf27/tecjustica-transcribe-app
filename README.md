@@ -36,16 +36,16 @@
 
 ---
 
-### 🎬 Demo
+### 🎬 Demo em vídeo
 
 <p align="center">
-  <a href="https://github.com/marcosmarf27/tecjustica-transcribe-app/raw/main/docs/assets/demo.mp4">
-    <img src="docs/assets/demo.gif" alt="Demo do TecJustiça Transcribe" width="820">
+  <a href="https://youtu.be/ECCIGjIR1Lo" title="Assistir no YouTube">
+    <img src="https://img.youtube.com/vi/ECCIGjIR1Lo/maxresdefault.jpg" alt="Demo do TecJustiça Transcribe — clique para assistir no YouTube" width="820">
   </a>
 </p>
 
 <p align="center">
-  <sub>▶ <a href="https://github.com/marcosmarf27/tecjustica-transcribe-app/raw/main/docs/assets/demo.mp4">Assistir ao demo completo (4 min, MP4, 8,6 MB)</a></sub>
+  <a href="https://youtu.be/ECCIGjIR1Lo"><img alt="YouTube" src="https://img.shields.io/badge/▶%20assistir%20no%20YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white"></a>
 </p>
 
 ## ✨ Por que existe
