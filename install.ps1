@@ -7,12 +7,12 @@
     diretamente do GitHub Releases.
 
 .EXAMPLE
-    irm https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-desktop/main/install.ps1 | iex
+    irm https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-app/main/install.ps1 | iex
 #>
 
 $ErrorActionPreference = "Stop"
 
-$repo = "marcosmarf27/tecjustica-transcribe-desktop"
+$repo = "marcosmarf27/tecjustica-transcribe-app"
 $appName = "TecJustiça Transcribe"
 
 function Write-Step {

@@ -104,10 +104,9 @@ Array de objetos com campos: `id`, `filename`, `filepath`, `model`, `language`, 
 - **ffmpeg bundled**: `resources/bin/{win,linux}/` é populado automaticamente antes do `dist:*` via hooks `predist:win`/`predist:linux` que rodam `node scripts/download-ffmpeg.js`. Os binários são copiados para `resources/bin/` no instalador e o `main.js` injeta esse caminho no `PATH` do backend Python. A pasta `resources/bin/` está no `.gitignore`
 
 ## Repositórios e Distribuição
-- **Repo de desenvolvimento** (PRIVADO): `marcosmarf27/tecjustica-transcribe-desktop` — código-fonte, NÃO pode ter releases públicos
-- **Repo de distribuição** (PÚBLICO): `marcosmarf27/tecjustica-transcribe-desktop-releases` — publica instaladores via GitHub Releases
-- **IMPORTANTE**: NUNCA criar releases no repo privado de desenvolvimento. Os instaladores (.exe, .AppImage) devem ser publicados APENAS no repo público de distribuição
-- **Landing page**: `transcricao-web/` deployada na Vercel em `https://transcricao-web.vercel.app` — página `/download` deve apontar para o repo público de distribuição
+- **Repo público open source (MIT)**: `marcosmarf27/tecjustica-transcribe-app` — código-fonte + releases dos instaladores
+- **Repo privado legado**: `marcosmarf27/tecjustica-transcribe-desktop` — histórico anterior ao open source (contém token HF antigo nos commits)
+- **Landing page**: `transcricao-web/` deployada na Vercel em `https://transcricao-web.vercel.app` — página `/download` aponta para Releases do repo público
 
 ## Compatibilidade e Versões
 - **Python**: 3.10-3.13 (3.14+ incompatível — whisperx não tem wheels). Auto-instalação de 3.11 via winget no Windows.

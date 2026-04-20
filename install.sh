@@ -3,12 +3,12 @@
 # Instalador one-liner do TecJustiça Transcribe para Linux.
 #
 # Uso:
-#   curl -fsSL https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-desktop/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-app/main/install.sh | bash
 #
 
 set -euo pipefail
 
-REPO="marcosmarf27/tecjustica-transcribe-desktop"
+REPO="marcosmarf27/tecjustica-transcribe-app"
 APP_NAME="TecJustiça Transcribe"
 BIN_NAME="tecjustica-transcribe"
 INSTALL_DIR="${HOME}/.local/bin"

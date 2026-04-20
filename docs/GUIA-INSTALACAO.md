@@ -89,7 +89,7 @@ Existem duas formas de instalar:
 ### 3.1 Instalador (recomendado)
 
 1. Acesse a página de releases do projeto:
-   **https://github.com/marcosmarf27/tecjustica-transcribe-desktop-releases/releases/latest**
+   **https://github.com/marcosmarf27/tecjustica-transcribe-app/releases/latest**
 
 2. Baixe o arquivo **`TecJustiça Transcribe Setup X.X.X.exe`** (~96 MB)
 
@@ -109,7 +109,7 @@ Existem duas formas de instalar:
 Para quem prefere usar o terminal, abra o **PowerShell** e execute:
 
 ```powershell
-irm https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-desktop-releases/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-app/main/install.ps1 | iex
 ```
 
 Este comando:
@@ -142,7 +142,7 @@ python3 --version
 Execute no terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-desktop-releases/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-app/main/install.sh | bash
 ```
 
 Este comando:
@@ -153,7 +153,7 @@ Este comando:
 
 ### 4.3 Instalação manual
 
-1. Baixe o arquivo `.AppImage` da [página de releases](https://github.com/marcosmarf27/tecjustica-transcribe-desktop-releases/releases/latest)
+1. Baixe o arquivo `.AppImage` da [página de releases](https://github.com/marcosmarf27/tecjustica-transcribe-app/releases/latest)
 2. Dê permissão de execução:
    ```bash
    chmod +x TecJustica-Transcribe-*.AppImage

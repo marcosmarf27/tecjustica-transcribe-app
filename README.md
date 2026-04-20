@@ -125,13 +125,13 @@ Baixe o `.exe` mais recente em **[Releases](../../releases/latest)** e execute. 
 ### Windows — PowerShell
 
 ```powershell
-irm https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-desktop/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-app/main/install.ps1 | iex
 ```
 
 ### Linux — AppImage
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-desktop/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/marcosmarf27/tecjustica-transcribe-app/main/install.sh | bash
 ```
 
 Isso baixa o AppImage, instala em `~/.local/bin/` e cria atalho no menu de aplicativos.
@@ -188,8 +188,8 @@ A partir daí, cada abertura leva segundos.
 ### Clone e dev
 
 ```bash
-git clone https://github.com/marcosmarf27/tecjustica-transcribe-desktop.git
-cd tecjustica-transcribe-desktop
+git clone https://github.com/marcosmarf27/tecjustica-transcribe-app.git
+cd tecjustica-transcribe-app
 npm install
 npm run download:ffmpeg   # baixa ffmpeg bundled para resources/bin/
 npm start                 # roda o app em modo dev
