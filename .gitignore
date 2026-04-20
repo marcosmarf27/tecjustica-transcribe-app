@@ -1,0 +1,25 @@
+# Secrets e configuração local
+.env
+.env.local
+python-backend/.env
+.mcp.json
+.claude/
+
+# Build artifacts
+dist/
+node_modules/
+python-backend/venv/
+python-backend/__pycache__/
+python-backend/dist/
+python-backend/build/
+*.pyc
+*.db
+.vercel
+resources/bin/
+
+# Assets de desenvolvimento locais
+temp/
+doc Gemini/
+
+# Logs
+*.log

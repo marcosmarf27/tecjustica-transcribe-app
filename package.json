@@ -1,0 +1,84 @@
+{
+  "name": "tecjustica-transcribe",
+  "version": "1.0.0",
+  "description": "Transcrição de audiências judiciais com WhisperX",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "download:ffmpeg": "node scripts/download-ffmpeg.js",
+    "dist": "electron-builder",
+    "predist:linux": "node scripts/download-ffmpeg.js linux",
+    "dist:linux": "electron-builder --linux",
+    "predist:win": "node scripts/download-ffmpeg.js win",
+    "dist:win": "electron-builder --win"
+  },
+  "author": "Marcos Fonseca",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^41.0.3",
+    "electron-builder": "^26.8.1",
+    "sharp": "^0.34.5"
+  },
+  "build": {
+    "appId": "com.tecjustica.transcribe",
+    "productName": "TecJustiça Transcribe",
+    "extraResources": [
+      {
+        "from": "python-backend",
+        "to": "python-backend",
+        "filter": [
+          "*.py",
+          "requirements.txt",
+          ".env.example"
+        ]
+      }
+    ],
+    "files": [
+      "main.js",
+      "preload.js",
+      "license.js",
+      "renderer/**",
+      "index.html",
+      "styles.css",
+      "assets/icon.png",
+      "assets/projurista.jpeg"
+    ],
+    "icon": "assets/icon.png",
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "AudioVideo",
+      "icon": "assets/icon.png",
+      "artifactName": "TecJustica-Transcribe-${version}.${ext}",
+      "extraResources": [
+        {
+          "from": "resources/bin/linux",
+          "to": "bin",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "TecJustica-Transcribe-Setup-${version}.${ext}",
+      "extraResources": [
+        {
+          "from": "resources/bin/win",
+          "to": "bin",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "docx": "^9.6.1"
+  }
+}

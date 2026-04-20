@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src http://localhost:* http://127.0.0.1:* https://generativelanguage.googleapis.com; media-src file: blob:">
+  <title>TecJustiça Transcribe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Title Bar -->
+  <div id="titlebar">
+    <span class="titlebar-title">TecJustiça Transcribe</span>
+    <div class="titlebar-controls">
+      <button class="titlebar-btn" id="btn-minimize" title="Minimizar">
+        <svg width="10" height="1" viewBox="0 0 10 1"><rect width="10" height="1" fill="currentColor"/></svg>
+      </button>
+      <button class="titlebar-btn" id="btn-maximize" title="Maximizar">
+        <svg width="10" height="10" viewBox="0 0 10 10"><rect width="10" height="10" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+      <button class="titlebar-btn titlebar-btn-close" id="btn-close" title="Fechar">
+        <svg width="10" height="10" viewBox="0 0 10 10"><line x1="0" y1="0" x2="10" y2="10" stroke="currentColor" stroke-width="1.2"/><line x1="10" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="1.2"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div id="app-layout">
+    <!-- Activity Bar (lateral) -->
+    <div id="activity-bar">
+      <div class="sidebar-brand">
+        <img src="assets/projurista.jpeg" class="partner-logo" alt="Projurista">
+        <span class="brand-name">TecJustiça</span>
+        <span class="brand-product">Transcribe</span>
+        <div class="brand-partnership">
+          <span class="partner-divider"></span>
+          <span class="partner-text">Parceria Projurista</span>
+        </div>
+      </div>
+      <button class="activity-btn active" data-page="transcription" title="Transcrição">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        <span class="sidebar-label">Transcrição</span>
+      </button>
+      <button class="activity-btn" data-page="models" title="Modelos">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+        <span class="sidebar-label">Modelos</span>
+      </button>
+      <button class="activity-btn" data-page="settings" title="Configurações">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span class="sidebar-label">Configurações</span>
+      </button>
+      <button class="activity-btn" data-page="diagnostics" title="Diagnóstico">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        <span class="sidebar-label">Diagnóstico</span>
+      </button>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-footer">
+        <button id="sidebar-toggle" class="sidebar-toggle-btn" title="Recolher barra lateral">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div id="content">
+      <!-- Setup (primeiro uso) -->
+      <div id="page-setup" class="page">
+        <div class="setup-container">
+          <h2>Bem-vindo ao TecJustiça Transcribe</h2>
+          <p class="setup-desc">Na primeira execução, precisamos configurar o ambiente Python com as dependências de IA (PyTorch, WhisperX). Isso requer internet e pode levar 10-30 minutos.</p>
+
+          <div class="setup-requirements">
+            <h3>Requisitos do sistema</h3>
+            <div class="req-grid">
+              <div class="req-item">
+                <span class="req-icon">🐍</span>
+                <span class="req-label">Python 3.10 - 3.13</span>
+                <span class="req-detail">Adicionado ao PATH</span>
+              </div>
+              <div class="req-item">
+                <span class="req-icon">🌐</span>
+                <span class="req-label">Internet</span>
+                <span class="req-detail">~3 GB de download</span>
+              </div>
+              <div class="req-item">
+                <span class="req-icon">🎬</span>
+                <span class="req-label">ffmpeg</span>
+                <span class="req-detail">No PATH do sistema</span>
+              </div>
+            </div>
+
+            <h3>Para aceleração GPU (recomendado)</h3>
+            <div class="req-grid">
+              <div class="req-item">
+                <span class="req-icon">🎮</span>
+                <span class="req-label">GPU NVIDIA</span>
+                <span class="req-detail">6+ GB VRAM</span>
+              </div>
+              <div class="req-item">
+                <span class="req-icon">⚡</span>
+                <span class="req-label">Driver NVIDIA 560+</span>
+                <span class="req-detail">Para CUDA 12.6</span>
+              </div>
+            </div>
+
+            <p class="req-note">Sem GPU NVIDIA, a transcrição funcionará via CPU (mais lenta).</p>
+          </div>
+
+          <div id="setup-python-status" class="setup-check">
+            <span class="setup-check-icon">...</span>
+            <span class="setup-check-text">Verificando Python...</span>
+          </div>
+
+          <div id="setup-ffmpeg-status" class="setup-check">
+            <span class="setup-check-icon">...</span>
+            <span class="setup-check-text">Verificando ffmpeg...</span>
+          </div>
+
+          <button id="btn-start-setup" class="btn-primary" disabled>Iniciar configuração</button>
+
+          <div id="setup-progress" class="hidden">
+            <div class="progress-bar"><div class="progress-fill" id="setup-progress-fill"></div></div>
+            <p id="setup-progress-text" class="progress-text"></p>
+          </div>
+
+          <div id="setup-error" class="hidden">
+            <p class="diag-error" id="setup-error-text"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Splash / Loading -->
+      <div id="splash" class="page">
+        <div class="splash-container">
+          <div class="splash-spinner"></div>
+          <p class="splash-text">Iniciando backend...</p>
+        </div>
+      </div>
+
+      <!-- Page: Transcrição -->
+      <div id="page-transcription" class="page" style="position: relative;">
+        <!-- Drop overlay -->
+        <div id="drop-overlay" class="drop-overlay hidden">
+          <div class="drop-overlay-content">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <p>Solte o arquivo aqui para transcrever</p>
+          </div>
+        </div>
+
+        <!-- Sub-view 1: Dashboard -->
+        <div id="view-history">
+          <div id="dashboard-grid" class="dashboard-grid dashboard-animate">
+            <!-- Card Welcome/CTA (span 8) -->
+            <div class="dashboard-card dashboard-card-welcome" style="--card-index:0">
+              <div class="dashboard-welcome-content">
+                <h2 class="dashboard-welcome-title">Motor de Transcricao Neural</h2>
+                <p class="dashboard-welcome-desc">Converta audiencias judiciais em texto com IA de alta precisao. Suporte a diarizacao de falantes e exportacao em multiplos formatos.</p>
+                <button id="btn-new-transcription" class="btn-primary dashboard-cta-btn">
+                  <span class="material-symbols-outlined" style="font-size:18px">add_circle</span>
+                  Nova Transcricao
+                </button>
+              </div>
+              <div class="dashboard-welcome-decoration"></div>
+            </div>
+
+            <!-- Card Total (span 4) -->
+            <div class="dashboard-card dashboard-card-stat" style="--card-index:1">
+              <div class="dashboard-stat-header">
+                <span class="material-symbols-outlined dashboard-stat-icon">description</span>
+                <span class="dashboard-stat-label">Transcricoes</span>
+              </div>
+              <span id="dash-total-count" class="dashboard-stat-number">0</span>
+              <span id="dash-weekly-badge" class="dashboard-stat-badge hidden">+0 esta semana</span>
+            </div>
+
+            <!-- Card Horas (span 4) -->
+            <div class="dashboard-card dashboard-card-stat" style="--card-index:2">
+              <div class="dashboard-stat-header">
+                <span class="material-symbols-outlined dashboard-stat-icon">schedule</span>
+                <span class="dashboard-stat-label">Horas Transcritas</span>
+              </div>
+              <span id="dash-total-hours" class="dashboard-stat-number">0h</span>
+            </div>
+
+            <!-- Card Modelo Favorito (span 4) -->
+            <div class="dashboard-card dashboard-card-stat" style="--card-index:3">
+              <div class="dashboard-stat-header">
+                <span class="material-symbols-outlined dashboard-stat-icon">psychology</span>
+                <span class="dashboard-stat-label">Modelo Favorito</span>
+              </div>
+              <span id="dash-favorite-model" class="dashboard-stat-number dashboard-stat-model">--</span>
+            </div>
+
+            <!-- Card Ultima Transcricao (span 4) -->
+            <div class="dashboard-card dashboard-card-last" style="--card-index:4">
+              <div class="dashboard-stat-header">
+                <span class="material-symbols-outlined dashboard-stat-icon">history</span>
+                <span class="dashboard-stat-label">Ultima Transcricao</span>
+              </div>
+              <div id="dash-last-transcription" class="dashboard-last-content">
+                <span class="dashboard-last-empty">--</span>
+              </div>
+            </div>
+
+            <!-- Card Recentes (span 12) -->
+            <div class="dashboard-card dashboard-card-recent" style="--card-index:5">
+              <div class="dashboard-recent-header">
+                <span class="material-symbols-outlined dashboard-stat-icon">format_list_bulleted</span>
+                <span class="dashboard-stat-label">Transcricoes Recentes</span>
+              </div>
+              <div id="dash-recent-list" class="dashboard-recent-list">
+                <div id="dash-recent-empty" class="dashboard-recent-empty">
+                  <div class="bento-icon-large" style="margin: 0 auto 16px; width:64px; height:64px;">
+                    <span class="material-symbols-outlined" style="font-size:28px">mic</span>
+                  </div>
+                  <h3 style="margin:0 0 4px; font-size:16px; color:var(--on-surface);">Nenhuma transcricao ainda</h3>
+                  <p style="margin:0 0 16px; font-size:13px; color:var(--on-surface-variant);">Selecione um arquivo de audio ou video para comecar</p>
+                  <button id="btn-empty-new" class="btn-primary empty-state-btn">Criar primeira transcricao</button>
+                  <p class="empty-hint" style="margin-top:8px;">ou arraste um arquivo para ca</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-view 2: Formulário -->
+        <div id="view-form" class="hidden">
+          <button id="btn-back-to-history" class="btn-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Voltar ao histórico
+          </button>
+
+          <!-- Header -->
+          <div class="form-header bento-header">
+            <h2 class="bento-title">Nova Transcrição</h2>
+            <p class="form-subtitle bento-subtitle">Configure o motor de processamento neural para converter seus arquivos de mídia em evidências textuais precisas.</p>
+          </div>
+
+          <!-- Warnings -->
+          <div id="cpu-warning" class="warning-banner hidden">
+            Rodando em modo CPU. A transcrição será significativamente mais lenta. Recomenda-se uma GPU NVIDIA com CUDA.
+          </div>
+          <div id="no-models-warning" class="warning-banner hidden">
+            Nenhum modelo baixado. Vá para a página de Modelos para baixar pelo menos um.
+          </div>
+
+          <!-- Controles -->
+          <div class="transcribe-controls bento-grid">
+            <div class="control-card bento-card bento-card-dropzone bento-card-full">
+              <div class="dropzone-inner bento-dropzone-inner">
+                <div class="dropzone-icon bento-icon-large">
+                  <span class="material-symbols-outlined font-bold text-4xl">cloud_upload</span>
+                </div>
+                <h3 class="dropzone-title">Arraste seus arquivos aqui</h3>
+                <p class="dropzone-hint">Suporta MP3, MP4, WAV e FLAC (Máximo 2GB)</p>
+                <div style="margin-top: 16px;">
+                  <button id="btn-select-file" class="btn-secondary">Selecionar do Computador</button>
+                </div>
+                <span id="selected-file" class="selected-file mt-2">Nenhum arquivo selecionado</span>
+              </div>
+            </div>
+
+            <div class="control-card bento-card bento-card-half">
+              <div class="control-card-label bento-card-header">
+                <span class="material-symbols-outlined text-primary-fixed">language</span>
+                <label for="select-language">Idioma do Áudio</label>
+              </div>
+              <select id="select-language" class="select-input bento-select">
+                <option value="auto">Detecção Automática (Recomendado)</option>
+                <option value="pt">Português (Brasil)</option>
+                <option value="en">Inglês</option>
+                <option value="es">Espanhol</option>
+              </select>
+              <p class="bento-hint text-xs italic opacity-60 mt-2">O sistema identificará automaticamente o idioma predominante se não especificado.</p>
+            </div>
+
+            <div class="control-card bento-card bento-card-half">
+              <div class="control-card-label bento-card-header">
+                <span class="material-symbols-outlined text-primary-fixed">psychology</span>
+                <label>Modelo de IA</label>
+              </div>
+              <div id="model-buttons-container" class="bento-model-grid">
+                <p class="text-sm text-on-surface-variant">Carregando modelos...</p>
+              </div>
+              <input type="hidden" id="select-model" value="" />
+            </div>
+
+            <div class="control-card bento-card bento-card-full control-card-diarize bento-flex-between">
+              <div class="diarize-left flex items-center gap-4">
+                <div class="diarize-icon-box bento-icon-box">
+                  <span class="material-symbols-outlined text-primary">groups</span>
+                </div>
+                <div class="diarize-info">
+                  <h4 class="font-bold text-on-surface mb-1">Diarização de Locutores</h4>
+                  <p class="text-sm text-on-surface-variant">Identificar e rotular diferentes vozes no áudio automaticamente.</p>
+                </div>
+              </div>
+              <label class="toggle-switch bento-toggle">
+                <input type="checkbox" id="check-diarize">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+
+            <div class="bento-action-area bento-card-full mt-4">
+              <button id="btn-transcribe" class="btn-primary btn-hero bento-btn-hero" disabled>
+                <span class="material-symbols-outlined font-bold">play_arrow</span>
+                Iniciar Transcrição
+              </button>
+              <p class="bento-eta text-center mt-6 text-xs uppercase opacity-40">Tempo estimado: ~2 minutos para cada 30 min de áudio</p>
+            </div>
+          </div>
+
+          <!-- Progresso -->
+          <div id="transcribe-progress" class="progress-enhanced hidden">
+            <div class="progress-stages">
+              <div class="stage" data-stage="modelo">Modelo</div>
+              <div class="stage" data-stage="audio">Áudio</div>
+              <div class="stage" data-stage="transcricao">Transcrição</div>
+              <div class="stage" data-stage="alinhamento">Alinhamento</div>
+              <div class="stage" data-stage="diarizacao">Diarização</div>
+              <div class="stage" data-stage="salvando">Salvando</div>
+            </div>
+            <div class="progress-info">
+              <span id="progress-step" class="progress-step"></span>
+              <span id="progress-percent" class="progress-percent"></span>
+              <span id="progress-eta" class="progress-eta"></span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="transcribe-progress-fill"></div></div>
+            <p id="transcribe-progress-text" class="progress-description"></p>
+          </div>
+        </div>
+
+        <!-- Sub-view 3: Resultado (Editor Split-Pane Style) -->
+        <div id="view-result" class="hidden">
+          <button id="btn-back-from-result" class="btn-back">
+            <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span>
+            Voltar ao histórico
+          </button>
+
+          <!-- Player de mídia -->
+          <div id="media-player" class="hidden bento-media-player">
+            <div id="player-container"></div>
+          </div>
+
+          <!-- Resultado -->
+          <div id="transcribe-result" class="editor-panel bento-editor-panel">
+            <div class="editor-toolbar bento-editor-toolbar">
+              <div class="result-header bento-flex-between">
+                <div class="flex items-center gap-4">
+                  <h3 style="margin:0">Resultado</h3>
+                </div>
+                <div class="export-buttons bento-export-buttons">
+                  <button id="btn-copy-text" class="bento-toolbar-btn" title="Copiar texto para clipboard">
+                    <span class="material-symbols-outlined text-sm">content_copy</span>
+                    Copiar Texto
+                  </button>
+                  <div class="bento-format-toggle">
+                    <button id="btn-open-srt" class="bento-format-btn active" title="SRT">SRT</button>
+                    <button id="btn-open-txt" class="bento-format-btn" title="TXT">TXT</button>
+                    <button id="btn-open-json" class="bento-format-btn" title="JSON">JSON</button>
+                  </div>
+                  <button id="btn-save-as" class="bento-toolbar-btn" title="Salvar como...">
+                    <span class="material-symbols-outlined text-sm">save</span>
+                  </button>
+                  <button id="btn-export-docx" class="bento-toolbar-btn" title="Exportar relatório DOCX completo">
+                    <span class="material-symbols-outlined text-sm">description</span>
+                    DOCX
+                  </button>
+                  <button id="btn-re-export" class="bento-toolbar-btn hidden" title="Re-exportar com edições">
+                    <span class="material-symbols-outlined text-sm">sync</span>
+                  </button>
+                  <button id="btn-analyze-ai" class="bento-toolbar-btn btn-ai-analyze" title="Analisar com IA">
+                    <span class="material-symbols-outlined text-sm">psychology</span>
+                    <span id="btn-ai-label">Analisar com IA</span>
+                    <span id="btn-ai-badge" class="ai-badge hidden"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="search-bar bento-search-bar">
+                <span class="material-symbols-outlined text-sm" style="color:var(--on-surface-variant)">search</span>
+                <input type="text" id="search-input" class="text-input" placeholder="Buscar na transcrição...">
+                <span id="search-count" class="search-count hidden">0/0</span>
+                <button id="search-prev" class="btn-icon" title="Anterior (Shift+Enter)">
+                  <span class="material-symbols-outlined" style="font-size:14px">expand_less</span>
+                </button>
+                <button id="search-next" class="btn-icon" title="Próximo (Enter)">
+                  <span class="material-symbols-outlined" style="font-size:14px">expand_more</span>
+                </button>
+                <button id="search-clear" class="btn-icon" title="Limpar (Esc)">
+                  <span class="material-symbols-outlined" style="font-size:14px">close</span>
+                </button>
+              </div>
+            </div>
+            <div id="speaker-filter-bar" class="speaker-filter-bar hidden"></div>
+            <div id="transcribe-segments" class="segments-container"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer lateral: Análise IA -->
+      <div id="analysis-drawer" class="analysis-drawer">
+        <div class="drawer-header">
+          <div class="drawer-title">
+            <div class="drawer-title-glow"></div>
+            <span class="material-symbols-outlined drawer-title-icon">psychology</span>
+            <span>Análise com IA</span>
+          </div>
+          <button id="btn-close-drawer" class="btn-icon drawer-close">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div class="drawer-body">
+          <!-- Onboarding: sem API key -->
+          <div id="drawer-no-key" class="drawer-section hidden">
+            <div class="drawer-onboarding">
+              <div class="onboarding-hero">
+                <div class="onboarding-icon-ring">
+                  <span class="material-symbols-outlined" style="font-size:32px; color:var(--primary)">auto_awesome</span>
+                </div>
+                <h3 class="onboarding-title">Analise com Inteligência Artificial</h3>
+                <p class="onboarding-desc">O Gemini identifica automaticamente os tópicos da audiência e permite navegar por cada momento do vídeo.</p>
+              </div>
+
+              <div class="onboarding-features">
+                <div class="onboarding-feature">
+                  <span class="material-symbols-outlined onboarding-feature-icon">topic</span>
+                  <div>
+                    <span class="onboarding-feature-title">Tópicos automáticos</span>
+                    <span class="onboarding-feature-desc">Identifica cada assunto discutido com resumo</span>
+                  </div>
+                </div>
+                <div class="onboarding-feature">
+                  <span class="material-symbols-outlined onboarding-feature-icon">play_circle</span>
+                  <div>
+                    <span class="onboarding-feature-title">Navegação por timestamp</span>
+                    <span class="onboarding-feature-desc">Clique no tópico e vá direto ao trecho no vídeo</span>
+                  </div>
+                </div>
+                <div class="onboarding-feature">
+                  <span class="material-symbols-outlined onboarding-feature-icon">summarize</span>
+                  <div>
+                    <span class="onboarding-feature-title">Resumo geral</span>
+                    <span class="onboarding-feature-desc">Visão completa do conteúdo em segundos</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="onboarding-cta">
+                <p class="onboarding-cta-text">Para começar, adicione sua chave gratuita do Google Gemini nas configurações.</p>
+                <button id="btn-goto-settings-key" class="onboarding-cta-btn">
+                  <span class="material-symbols-outlined" style="font-size:18px">key</span>
+                  Configurar API Key
+                </button>
+                <a id="link-get-gemini-key" href="#" class="onboarding-cta-link">
+                  Obter chave gratuita em aistudio.google.com →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Área de prompt (nova análise) -->
+          <div id="drawer-prompt-area" class="drawer-section hidden">
+            <div class="drawer-prompt-intro">
+              <span class="material-symbols-outlined" style="font-size:16px; color:var(--primary)">auto_awesome</span>
+              <span class="drawer-prompt-intro-text">Descreva o que deseja analisar — ou use o prompt padrão para identificar tópicos automaticamente.</span>
+            </div>
+            <textarea id="analysis-prompt" rows="5" class="drawer-textarea" placeholder="Descreva o que deseja analisar..."></textarea>
+            <div class="drawer-prompt-footer">
+              <span class="drawer-hint">
+                <span class="material-symbols-outlined" style="font-size:12px">cloud</span>
+                Gemini 2.5 Flash · requer internet
+              </span>
+              <button id="btn-run-analysis" class="drawer-run-btn">
+                <span class="material-symbols-outlined" style="font-size:16px">play_arrow</span>
+                Analisar
+              </button>
+            </div>
+            <div id="analysis-error" class="drawer-error hidden"></div>
+          </div>
+
+          <!-- Loading -->
+          <div id="analysis-loading" class="drawer-section drawer-loading hidden">
+            <div class="drawer-loading-anim">
+              <div class="drawer-loading-ring"></div>
+              <span class="material-symbols-outlined drawer-loading-icon">psychology</span>
+            </div>
+            <p class="drawer-loading-title">Analisando transcrição...</p>
+            <p class="drawer-loading-sub">O Gemini está identificando tópicos e gerando o resumo da audiência.</p>
+          </div>
+
+          <!-- Lista de análises anteriores -->
+          <div id="drawer-analyses" class="drawer-section hidden">
+            <div class="drawer-section-header">
+              <span class="drawer-section-label">Análises anteriores</span>
+              <button id="btn-new-analysis" class="drawer-new-btn">
+                <span class="material-symbols-outlined" style="font-size:14px">add</span>
+                Nova
+              </button>
+            </div>
+            <div id="analysis-list" class="drawer-analysis-list"></div>
+          </div>
+
+          <!-- Detalhe de análise -->
+          <div id="drawer-detail" class="drawer-section hidden">
+            <button id="btn-back-to-list" class="drawer-back-btn">
+              <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span>
+              Todas as análises
+            </button>
+            <div id="analysis-detail-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page: Modelos (Bento Style) -->
+      <div id="page-models" class="page">
+        <div class="bento-header" style="margin-bottom:32px">
+          <h2 class="bento-title">Models & Intelligence</h2>
+          <p class="bento-subtitle">Gerencie os modelos de inteligência artificial Whisper para transcrições offline de alta fidelidade.</p>
+        </div>
+        <div class="flex items-center" style="justify-content:space-between; margin-bottom:16px;">
+          <h3 style="font-family:var(--font-display); font-size:20px; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--on-surface);">
+            <span class="material-symbols-outlined" style="color:var(--primary)">deployed_code</span>
+            Modelos Whisper Disponíveis
+          </h3>
+          <span class="bento-engine-badge">v.2.4.0 Engine</span>
+        </div>
+        <div id="models-grid" class="bento-models-grid"></div>
+      </div>
+
+      <!-- Page: Configurações (Bento Style) -->
+      <div id="page-settings" class="page">
+        <div class="bento-header" style="margin-bottom:32px">
+          <h2 class="bento-title">Configurações</h2>
+          <p class="bento-subtitle">Ajuste os parâmetros de processamento e autenticação do sistema.</p>
+        </div>
+
+        <div class="settings-form glass-panel bento-settings-panel">
+          <h3 style="font-family:var(--font-display); font-size:20px; font-weight:700; display:flex; align-items:center; gap:8px; color:var(--on-surface); margin-bottom:24px;">
+            <span class="material-symbols-outlined" style="color:var(--primary)">settings_applications</span>
+            Configurações
+          </h3>
+
+          <!-- Token HuggingFace -->
+          <div class="setting-group bento-setting-group">
+            <label for="setting-hf-token" class="bento-setting-label">HuggingFace API Token</label>
+            <div class="input-with-toggle" style="position:relative;">
+              <input type="password" id="setting-hf-token" class="text-input bento-setting-input" placeholder="hf_...">
+              <button id="btn-toggle-token" class="btn-icon" title="Mostrar/ocultar token" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); border:none;">
+                <span class="material-symbols-outlined" style="font-size:18px">visibility</span>
+              </button>
+            </div>
+            <p class="setting-help bento-setting-help">
+              Obtenha em <a id="link-hf-token" href="#" class="setting-link">huggingface.co/settings/tokens</a> (tipo: Read).
+              Para diarização, aceite os termos:
+              <a id="link-pyannote-diar" href="#" class="setting-link">pyannote/speaker-diarization-3.1</a> e
+              <a id="link-pyannote-seg" href="#" class="setting-link">pyannote/segmentation-3.0</a>
+            </p>
+          </div>
+
+          <!-- Pasta de saída -->
+          <div class="setting-group bento-setting-group">
+            <label class="bento-setting-label">Pasta de Destino (Transcrição)</label>
+            <div class="flex" style="gap:8px;">
+              <input type="text" id="setting-output-dir" class="text-input bento-setting-input" style="flex:1" readonly value="./transcricoes">
+              <button id="btn-select-output-dir" class="bento-folder-btn" title="Escolher pasta">
+                <span class="material-symbols-outlined text-sm">folder_open</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Device -->
+          <div class="setting-group bento-setting-group">
+            <label for="setting-device" class="bento-setting-label">Processamento (Compute Device)</label>
+            <select id="setting-device" class="select-input bento-select">
+              <option value="auto">Auto (GPU se disponível)</option>
+              <option value="cuda">CUDA (GPU)</option>
+              <option value="cpu">CPU</option>
+            </select>
+          </div>
+
+          <!-- Batch size -->
+          <div class="setting-group bento-setting-group">
+            <label for="setting-batch-size" class="bento-setting-label">Batch Size</label>
+            <input type="number" id="setting-batch-size" class="text-input bento-setting-input" style="width:100px" min="0" max="32" value="0">
+            <p class="setting-help bento-setting-help">0 = automático baseado na VRAM. Valores 1-32 para controle manual.</p>
+          </div>
+
+          <!-- Gemini API Key -->
+          <div class="setting-group bento-setting-group">
+            <label for="setting-gemini-api-key" class="bento-setting-label">Google Gemini API Key</label>
+            <div class="input-with-toggle" style="position:relative;">
+              <input type="password" id="setting-gemini-api-key" class="text-input bento-setting-input" placeholder="AIza...">
+              <button id="btn-toggle-gemini-key" class="btn-icon" title="Mostrar/ocultar key" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); border:none;">
+                <span class="material-symbols-outlined" style="font-size:18px">visibility</span>
+              </button>
+            </div>
+            <p class="setting-help bento-setting-help">
+              Obtenha gratuitamente em <a id="link-gemini-key" href="#" class="setting-link">aistudio.google.com/apikey</a>.
+              Necessário para análise de transcrições com IA. Requer conexão com internet.
+            </p>
+          </div>
+
+          <button id="btn-save-settings" class="btn-primary bento-btn-hero" style="margin-top:8px">
+            Salvar Alterações
+          </button>
+          <span id="settings-saved-msg" class="saved-msg hidden">Salvo!</span>
+        </div>
+      </div>
+
+      <!-- Page: Diagnóstico -->
+      <div id="page-diagnostics" class="page">
+        <h2>Diagnóstico do Sistema</h2>
+        <div class="diag-container">
+          <div id="diagnostics-table">
+            <p class="page-placeholder">Aguardando backend...</p>
+          </div>
+        </div>
+        <button id="btn-refresh-diag" class="btn-secondary" style="margin-top: 16px;">Verificar novamente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div id="statusbar">
+    <span id="status-gpu">GPU: --</span>
+    <span id="status-vram">VRAM: --</span>
+    <span id="status-cuda">CUDA: --</span>
+    <span id="status-backend" class="status-indicator">Backend: --</span>
+    <span id="status-transcription" class="status-transcription hidden"></span>
+    <span id="status-version" class="status-right">v--</span>
+  </div>
+
+  <!-- Chat Bubble (FAB) -->
+  <button id="chat-bubble" class="chat-fab" title="Chat com a transcrição">
+    <span class="material-symbols-outlined" style="font-size:24px">chat_bubble</span>
+  </button>
+
+  <!-- Chat Modal -->
+  <div id="chat-modal" class="chat-modal">
+    <div class="chat-modal-header">
+      <div class="chat-modal-title">
+        <span class="material-symbols-outlined" style="font-size:18px; color:var(--primary)">chat</span>
+        <span>Chat</span>
+      </div>
+      <div class="chat-modal-controls">
+        <select id="chat-conversation-select" class="chat-conv-select" title="Selecionar conversa"></select>
+        <button id="chat-new-btn" class="chat-header-btn" title="Nova conversa">
+          <span class="material-symbols-outlined" style="font-size:16px">add</span>
+        </button>
+        <button id="chat-delete-btn" class="chat-header-btn" title="Excluir conversa">
+          <span class="material-symbols-outlined" style="font-size:16px">delete</span>
+        </button>
+        <button id="chat-expand-btn" class="chat-header-btn" title="Expandir">
+          <span class="material-symbols-outlined" style="font-size:16px">open_in_full</span>
+        </button>
+        <button id="chat-close-btn" class="chat-header-btn" title="Fechar">
+          <span class="material-symbols-outlined" style="font-size:16px">close</span>
+        </button>
+      </div>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div id="chat-empty-state" class="chat-empty-state">
+        <span class="material-symbols-outlined" style="font-size:40px; color:var(--primary); opacity:0.5">forum</span>
+        <p class="chat-empty-title">Pergunte sobre a transcrição</p>
+        <p class="chat-empty-desc">Faça perguntas específicas e receba respostas com citações do vídeo/áudio.</p>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Pergunte sobre a transcrição..." autocomplete="off">
+      <button id="chat-send-btn" class="chat-send-btn" title="Enviar (Enter)">
+        <span class="material-symbols-outlined" style="font-size:20px">send</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="renderer/main.js"></script>
+</body>
+</html>

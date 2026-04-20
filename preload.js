@@ -1,0 +1,43 @@
+const { contextBridge, ipcRenderer, webUtils } = require('electron');
+
+contextBridge.exposeInMainWorld('api', {
+  getBackendUrl: () => ipcRenderer.invoke('get-backend-url'),
+  selectAudioFile: () => ipcRenderer.invoke('select-audio-file'),
+  saveExportFile: (name, filters) => ipcRenderer.invoke('save-export-file', name, filters),
+  selectDirectory: () => ipcRenderer.invoke('select-directory'),
+  getAppVersion: () => ipcRenderer.invoke('get-app-version'),
+  getConfig: () => ipcRenderer.invoke('get-config'),
+  saveConfig: (config) => ipcRenderer.invoke('save-config', config),
+  openFile: (filePath) => ipcRenderer.invoke('open-file', filePath),
+  minimizeWindow: () => ipcRenderer.invoke('window-minimize'),
+  maximizeWindow: () => ipcRenderer.invoke('window-maximize'),
+  closeWindow: () => ipcRenderer.invoke('window-close'),
+  checkSetup: () => ipcRenderer.invoke('check-setup'),
+  getBackendPort: () => ipcRenderer.invoke('get-backend-port'),
+  runSetup: () => ipcRenderer.invoke('run-setup'),
+  startBackendAfterSetup: () => ipcRenderer.invoke('start-backend-after-setup'),
+  onBackendStatus: (cb) => ipcRenderer.on('backend-status', (_, data) => cb(data)),
+  onSetupStatus: (cb) => ipcRenderer.on('setup-status', (_, data) => cb(data)),
+  // SQLite CRUD
+  saveTranscription: (data) => ipcRenderer.invoke('db-save-transcription', data),
+  getTranscriptions: () => ipcRenderer.invoke('db-get-transcriptions'),
+  getTranscription: (id) => ipcRenderer.invoke('db-get-transcription', id),
+  deleteTranscription: (id) => ipcRenderer.invoke('db-delete-transcription', id),
+  updateSegments: (id, segments) => ipcRenderer.invoke('db-update-segments', id, segments),
+  updateSpeakerMap: (id, map) => ipcRenderer.invoke('db-update-speaker-map', id, map),
+  searchTranscriptions: (query) => ipcRenderer.invoke('db-search-transcriptions', query),
+  reExport: (id) => ipcRenderer.invoke('re-export', id),
+  exportDocx: (id) => ipcRenderer.invoke('export-docx', id),
+  getFilePath: (file) => webUtils.getPathForFile(file),
+  // Gemini Analysis
+  analyzeTranscription: (data) => ipcRenderer.invoke('gemini-analyze', data),
+  getAnalyses: (transcriptionId) => ipcRenderer.invoke('db-get-analyses', transcriptionId),
+  deleteAnalysis: (id) => ipcRenderer.invoke('db-delete-analysis', id),
+  // Chat
+  chatSendMessage: (data) => ipcRenderer.invoke('chat-send-message', data),
+  chatGetConversations: (transcriptionId) => ipcRenderer.invoke('chat-get-conversations', transcriptionId),
+  chatDeleteConversation: (id) => ipcRenderer.invoke('chat-delete-conversation', id),
+  onChatStreamChunk: (cb) => ipcRenderer.on('chat-stream-chunk', (_, data) => cb(data)),
+  onChatStreamDone: (cb) => ipcRenderer.on('chat-stream-done', (_, data) => cb(data)),
+  onChatStreamError: (cb) => ipcRenderer.on('chat-stream-error', (_, data) => cb(data)),
+});
